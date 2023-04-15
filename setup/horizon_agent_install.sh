@@ -71,13 +71,28 @@ then
     echo "===> Installing Horizon Agent"
     cd "/tmp/VMware-horizonagent-linux-x86_64-*/"
 
-    if [ -d "/tmp/VMware-horizonagent-linux-x86_64-*" ]
+    echo "===> Looking for vhci-hcd driver status"
+    if [ -f "/usr/lib/modules/$(uname -r)/kernel/drivers/usb/usbip/vhci-hcd.ko" ]
     then
-        ./install_viewagent.sh -A yes -U yes -a yes --webcam
-    else
-        echo "===> Error: Directory /tmp/VMware-horizonagent-linux-x86_64-* does not exists."
-        echo "===> Error: Unable to install Horizon"
+        echo "===> Found vhci-hcd driver, enabling Horizon USB redirection"
+        INSTALL_OPTIONS="-A yes -U yes"
+    else 
+        echo "===> Driver vhci-hcd not installed, disabling Horizon USB redirection"
+        INSTALL_OPTIONS="-A yes"
     fi
+
+    echo "===> Looking for V4L2Loopback driver status"
+    if [ -f "/lib/modules/$(uname -r)/extra/v4l2loopback.ko" ]
+    then
+        echo "===> Found V4L2Loopback driver, enabling Horizon Real-Time Audio-Video"
+        INSTALL_OPTIONS="$INSTALL_OPTIONS -a yes --webcam"
+    else 
+        echo "===> Driver V4L2Loopback not installed, disabling Horizon Real-Time Audio-Video"
+        INSTALL_OPTIONS="$INSTALL_OPTIONS"
+    fi
+
+    ./install_viewagent.sh "$INSTALL_OPTIONS"
+
 else
     echo "===> Error: Directory /tmp/VMware-horizonagent-linux-x86_64-* does not exists."
     echo "===> Error: Unable to install Horizon"
