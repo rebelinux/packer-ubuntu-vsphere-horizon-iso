@@ -1,0 +1,75 @@
+# Name or IP of you vCenter Server
+vsphere_server          = "vcenter.demolab.com"
+
+# vsphere username
+vsphere_username        = "administrator@vsphere.local"
+
+# vsphere password
+vsphere_password        = "SomeSecurePassword"
+
+# vsphere datacenter name
+vsphere_datacenter      = "datacenter1"
+
+# vsphere cluster name
+vsphere_cluster           = "esx1.demolab.com"
+
+# vsphere folder name
+vsphere_folder           = "folder"
+
+# vsphere network
+vsphere_network         = "VM Network"
+
+# vsphere datastore
+vsphere_datastore       = "datastore1"
+
+# cloud_init files for unattended configuration for Ubuntu
+cloudinit_userdata      = "./http/user-data"
+cloudinit_metadata      = "./http/meta-data"
+
+# Ubuntu boot command
+boot_command = [
+    "c<wait>",
+    "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net\"",
+    "<enter><wait>",
+    "initrd /casper/initrd",
+    "<enter><wait>",
+    "boot",
+    "<enter>"
+    ]
+
+# final clean up script
+shell_scripts           = [
+    "./setup/packages.sh",
+    "./setup/desktop_postinstall.sh",
+    "./setup/ad_domain_join.sh",
+    "./setup/horizon_agent_install.sh",
+    "./setup/cleanup.sh"
+    ]
+
+# SSH username (created in user-data. If you change it here the please also adjust in ./html/user-data)
+ssh_username            = "godadmin"
+
+# SSH password (created in user-data. If you change it here the please also adjust in ./html/user-data)
+ssh_password            = "godadmin"
+
+# ISO Objects
+iso_path = ["[vmware-nfs] /iso/ubuntu-22.04.1-live-server-amd64.iso"]
+
+# NTP Server
+ntp_server = "changeme"
+timezone = "changeme"
+
+# AD Domain
+ad_domain = "CHANGEME"
+
+# AD Domain join password
+join_password = "changeme"
+
+# AD Domain join username
+join_username = "changeme"
+
+horizon_agent_datastore = "HDD-VM-ISO-LOW-PERF"
+
+horizon_agent_path = "/ISO/VMWARE/Horizon/"
+
+horizon_agent_file = "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
