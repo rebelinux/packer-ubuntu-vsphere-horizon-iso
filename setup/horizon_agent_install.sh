@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Extracting VMware Horizon Agent files
-if [ -d "/tmp/VMware-horizonagent-linux-x86_64-*" ]
+if [ -d "/tmp/$HORIZONAGENTFILE" ]
 then
     echo "===> Extracting VMware Horizon Agent files"
     cd "/tmp"
-    tar -zxf VMware-horizonagent-linux-x86_64-*
+    tar -zxf "$HORIZONAGENTFILE"
     # Downloading V4L2Loopback driver files
     echo "===> Downloading VHCI-HCD driver files"
     wget --quiet "https://github.com/umlaeute/v4l2loopback/archive/refs/tags/v0.12.5.tar.gz"
@@ -13,7 +13,7 @@ then
     echo "===> Downloading VHCI-HCD driver files"
     wget --quiet https://sourceforge.net/projects/usb-vhci/files/linux%20kernel%20module/vhci-hcd-1.15.tar.gz/download -O "vhci-hcd-1.15.tar.gz"
 else
-    echo "===> Error: Directory /tmp/VMware-horizonagent-linux-x86_64-* does not exists."
+    echo "===> Error: Directory /tmp/$HORIZONAGENTFILE does not exists."
     echo "===> Error: Unable to extract VMware Horizon Agent files"
 fi
 
@@ -28,7 +28,7 @@ then
     # Patching V4L2Loopback driver files
     echo "===> Patching V4L2Loopback driver files"
     cd "v4l2loopback-0.12.5/"
-    patch -p1 < "/tmp/VMware-horizonagent-linux-x86_64-*/resources/v4l2loopback/v4l2loopback.patch"
+    patch -p1 < "/tmp/$HORIZONAGENTFILE/resources/v4l2loopback/v4l2loopback.patch"
 
     # Compiling V4L2Loopback driver files
     echo "===> Extracting V4L2Loopback driver files"
@@ -54,7 +54,7 @@ then
     # Patching VHCI-HCD driver files
     echo "===> Extracting VHCI-HCD driver files"
     cd "vhci-hcd-1.15"
-    patch -p1 < "/tmp/VMware-horizonagent-linux-x86_64-*/resources/vhci/patch/vhci.patch"
+    patch -p1 < "/tmp/$HORIZONAGENTFILE/resources/vhci/patch/vhci.patch"
 
     # Compiling VHCI-HCD driver files
     echo "===> Extracting VHCI-HCD driver files"
@@ -66,10 +66,10 @@ else
 fi
 
 # Installing Horizon Agent
-if [ -d "/tmp/VMware-horizonagent-linux-x86_64-*" ]
+if [ -d "/tmp/$HORIZONAGENTFILE" ]
 then
     echo "===> Installing Horizon Agent"
-    cd "/tmp/VMware-horizonagent-linux-x86_64-*/"
+    cd "/tmp/$HORIZONAGENTFILE/"
 
     echo "===> Looking for vhci-hcd driver status"
     if [ -f "/usr/lib/modules/$(uname -r)/kernel/drivers/usb/usbip/vhci-hcd.ko" ]
@@ -94,7 +94,7 @@ then
     ./install_viewagent.sh "$INSTALL_OPTIONS"
 
 else
-    echo "===> Error: Directory /tmp/VMware-horizonagent-linux-x86_64-* does not exists."
+    echo "===> Error: Directory /tmp/$HORIZONAGENTFILE does not exists."
     echo "===> Error: Unable to install Horizon"
 fi
 

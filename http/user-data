@@ -9,7 +9,7 @@ autoinstall:
         layout: en
         variant: us
     identity:
-        hostname: hz-tpl-ubuntu-2004
+        hostname: hz-tpl-ubuntu
         username: godadmin
         password: '$6$rounds=4096$Y0SjrsU5WHubYJvb$0BJhswGEAokE2OqlRFTgiUhJnquzDt2hAnrb3.g3DNTATZ01VLNbxlLRLMLk.PTHiMeP8fUg9WfVx.HeL7e8E0'
     ssh:

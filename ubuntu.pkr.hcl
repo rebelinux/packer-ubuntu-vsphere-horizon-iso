@@ -263,7 +263,8 @@ build {
       "JOINUSERNAME=${var.join_username}",
       "JOINPASSWORD=${var.join_password}",
       "NTPSERVER=${var.ntp_server}",
-      "ADDomain=${var.ad_domain}"
+      "ADDomain=${var.ad_domain}",
+      "HORIZONAGENTFILE=${var.horizon_agent_file}"
     ]
     scripts = var.shell_scripts
     expect_disconnect = true
