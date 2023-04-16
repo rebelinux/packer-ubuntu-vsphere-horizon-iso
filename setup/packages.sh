@@ -13,7 +13,7 @@ sudo rmmod v4l2loopback
 # Install Additional Packages
 echo "===> Installing additional packages"
 export DEBIAN_FRONTEND=noninteractive
-apt-get -qq install -y      \
+apt-get -qq -y install      \
             acl             \
             aptitude        \
             bash-completion \
@@ -32,6 +32,7 @@ apt-get -qq install -y      \
             make            \
             gcc             \
             libelf-dev      \
+            zenity          \
             ubuntu-desktop  
   
 # Updating MLocate database

@@ -33,12 +33,11 @@ apt-get -qq remove -y   \
 # Remove other packages present by default in Ubuntu Server but not
 # normally present in Ubuntu Desktop.
 echo "===> Remove other packages present by default in Ubuntu Server but not normally present in Ubuntu Desktop"
-apt-get -qq remove -y               \
+apt-get -qq -y remove           \
         ubuntu-server           \
         ubuntu-server-minimal   \
         binutils                \
         byobu                   \
-        curl                    \
         dmeventd                \
         finalrd                 \
         gawk                    \
