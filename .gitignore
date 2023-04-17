@@ -1,3 +1,4 @@
 variables.auto.pkrvars.hcl
 packer_cache/
 packerlog.txt
+files/VMware-horizonagent-linux-x86_64-*

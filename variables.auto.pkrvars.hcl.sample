@@ -22,20 +22,12 @@ vsphere_network         = "VM Network"
 # vsphere datastore
 vsphere_datastore       = "datastore1"
 
+# vsphere VM Name
+vsphere_vm_name         = "hz-tpl-ubuntu"
+
 # cloud_init files for unattended configuration for Ubuntu
 cloudinit_userdata      = "./http/user-data.pkrtpl.hcl"
 cloudinit_metadata      = "./http/meta-data"
-
-# Ubuntu boot command
-boot_command = [
-    "c<wait>",
-    "linux /casper/vmlinuz --- autoinstall ds=\"nocloud-net\"",
-    "<enter><wait>",
-    "initrd /casper/initrd",
-    "<enter><wait>",
-    "boot",
-    "<enter>"
-    ]
 
 # final clean up script
 shell_scripts           = [
@@ -46,11 +38,13 @@ shell_scripts           = [
     "./setup/cleanup.sh"
     ]
 
-# SSH username (created in user-data. If you change it here the please also adjust in ./html/user-data)
-ssh_username            = "godadmin"
+# SSH username
+build_username            = "godadmin"
 
-# SSH password (created in user-data. If you change it here the please also adjust in ./html/user-data)
-ssh_password            = "godadmin"
+# SSH password
+build_password            = "godadmin"
+
+build_password_encrypted = "$6$rounds=4096$Y0SjrsU5WHubYJvb$0BJhswGEAokE2OqlRFTgiUhJnquzDt2hAnrb3.g3DNTATZ01VLNbxlLRLMLk.PTHiMeP8fUg9WfVx.HeL7e8E0"
 
 # ISO Objects
 iso_path = ["[vmware-nfs] /iso/ubuntu-22.04.1-live-server-amd64.iso"]
@@ -68,8 +62,8 @@ join_password = "changeme"
 # AD Domain join username
 join_username = "changeme"
 
-horizon_agent_datastore = "HDD-VM-ISO-LOW-PERF"
-
-horizon_agent_path = "/ISO/VMWARE/Horizon/"
-
-horizon_agent_file = "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
+# Horizon Agent install files
+# Uncommnet this if using vcenter as web server
+// horizon_agent_datastore = "HDD-VM-ISO-LOW-PERF"
+// horizon_agent_path = "/ISO/VMWARE/Horizon/"
+// horizon_agent_file = "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
