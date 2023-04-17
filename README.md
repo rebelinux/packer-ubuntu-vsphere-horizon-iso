@@ -4,9 +4,9 @@ This repo builds automatically Ubuntu VM templates (Ubuntu 22.04) for VMware vSp
 
 Ubuntu ISO files gets downloaded from vCenter Datastore.
 
-## How to use this repo
+## :books: How to use this repo
 
-### Pre-requesites
+### :wrench: Pre-requesites
 
 Download or `git clone https://github.com/rebelinux/packer-ubuntu-vsphere-horizon-iso` this repo and make sure you have [Packer](https://www.packer.io/downloads) Version 1.8.5 or later installed. If you don't know Packer, it's a single commandline binary which only needs to be on your `PATH`.
 
@@ -17,6 +17,16 @@ Rename the file [variables.auto.pkrvars.hcl.sample](variables.auto.pkrvars.hcl.s
 ```bash
 mv variables.auto.pkrvars.hcl.sample variables.auto.pkrvars.hcl
 nano variables.auto.pkrvars.hcl
+```
+#### Option 1 Local Horizon Agent File (Default): 
+Copy the Horizon Agent installation file to the `./files/` folder:
+
+```bash
+[rebelinux@rebelpc packer-ubuntu-vsphere-horizon-iso]$ ls -alh files/
+total 127M
+-rw-r--r-- 1 rebelinux rebelinux    0 Apr 13 21:20 Place_Here_Horizon_Agent_Files.txt
+-rw-r--r-- 1 rebelinux rebelinux 127M Apr 10 08:31 "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
+[rebelinux@rebelpc packer-ubuntu-vsphere-horizon-iso]$  
 ```
 
 ### Step 2: Init Packer
