@@ -86,16 +86,6 @@ variable "mem_size" {
   default = 4096
 }
 
-variable "os_iso_checksum" {
-  type    = string
-  default = ""
-}
-
-variable "os_iso_url" {
-  type    = string
-  default = ""
-}
-
 variable "iso_path" {
   # type    = string
   description = "The path on the source vSphere datastore for ISO images."
@@ -233,7 +223,6 @@ source "vsphere-iso" "ubuntu" {
   notes = "Built by HashiCorp Packer on ${local.buildtime}."
   folder = var.vsphere_folder
   vcenter_server        = var.vsphere_server
-  #host                  = var.vsphere_host
   cluster               = var.vsphere_cluster
   username              = var.vsphere_username
   password              = var.vsphere_password
