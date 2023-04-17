@@ -4,14 +4,13 @@ autoinstall:
     early-commands:
         # Stop ssh for packer
         - sudo systemctl stop ssh
-    locale: en_US
+    locale: ${vm_guest_os_language}
     keyboard:
-        layout: en
-        variant: us
+        layout: ${vm_guest_os_keyboard}
     identity:
-        hostname: hz-tpl-ubuntu
-        username: godadmin
-        password: '$6$rounds=4096$Y0SjrsU5WHubYJvb$0BJhswGEAokE2OqlRFTgiUhJnquzDt2hAnrb3.g3DNTATZ01VLNbxlLRLMLk.PTHiMeP8fUg9WfVx.HeL7e8E0'
+        hostname: ${vm_hostname}
+        username: ${build_username}
+        password: ${build_password_encrypted}
     ssh:
         install-server: yes
         allow-pw: yes
@@ -43,3 +42,9 @@ autoinstall:
         - adcli
     user-data:
         disable_root: false
+        timezone: ${vm_guest_os_timezone}
+    late-commands:
+        - sed -i -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /target/etc/ssh/sshd_config
+        - echo '${build_username} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/${build_username}
+        - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/${build_username}
+

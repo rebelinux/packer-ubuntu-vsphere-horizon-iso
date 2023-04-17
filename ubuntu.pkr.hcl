@@ -8,6 +8,24 @@ packer {
   }
 }
 
+variable "vm_guest_os_language" {
+  type        = string
+  description = "The guest operating system lanugage."
+  default     = "en_US"
+}
+
+variable "vm_guest_os_keyboard" {
+  type        = string
+  description = "The guest operating system keyboard input."
+  default     = "us"
+}
+
+variable "vm_guest_os_timezone" {
+  type        = string
+  description = "The guest operating system timezone."
+  default     = "UTC"
+}
+
 variable "join_password" {
   type =  string
   default = ""
@@ -173,8 +191,42 @@ variable "boot_command" {
   default = []
 }
 
+// Communicator Settings and Credentials
+
+variable "build_username" {
+  type        = string
+  description = "The username to login to the guest operating system. (e.g. 'rainpole')"
+  sensitive   = true
+}
+
+variable "build_password" {
+  type        = string
+  description = "The password to login to the guest operating system."
+  sensitive   = true
+}
+
+variable "build_password_encrypted" {
+  type        = string
+  description = "The SHA-512 encrypted password to login to the guest operating system."
+  sensitive   = true
+}
+
 locals {
   buildtime = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
+  data_source_content = {
+    "/meta-data" = file("./http/meta-data")
+    "/user-data" = templatefile("./http/user-data.pkrtpl.hcl", {
+      build_username           = var.build_username
+      build_password           = var.build_password
+      build_password_encrypted = var.build_password_encrypted
+      vm_guest_os_language     = var.vm_guest_os_language
+      vm_guest_os_keyboard     = var.vm_guest_os_keyboard
+      vm_guest_os_timezone     = var.vm_guest_os_timezone
+      vm_ntp_server            = var.ntp_server
+      vm_hostname              = var.vsphere_vm_name
+      })
+    }
+    data_source_command = "ds=\"nocloud\""
 }
 
 source "vsphere-iso" "ubuntu" {
@@ -196,10 +248,7 @@ source "vsphere-iso" "ubuntu" {
   guest_os_type         = var.vsphere_guest_os_type
   iso_paths = var.iso_path
   remove_cdrom          = true
-  cd_content            = {
-    "/meta-data" = file("${var.cloudinit_metadata}")
-    "/user-data" = file("${var.cloudinit_userdata}")
-  }
+  cd_content            = local.data_source_content
   cd_label              = "cidata"
 
   network_adapters {
@@ -217,14 +266,23 @@ source "vsphere-iso" "ubuntu" {
   create_snapshot       = "true"
   snapshot_name         = "Horizon IC SnapShot"
   communicator          = "ssh"
-  ssh_username          = var.ssh_username
-  ssh_password          = var.ssh_password
+  ssh_username          = var.build_username
+  ssh_password          = var.build_password
   ssh_timeout           = "60m"
   ssh_handshake_attempts = "100000"
 
   boot_order            = "disk,cdrom,floppy"
   boot_wait             = "3s"
-  boot_command          = var.boot_command
+  # Ubuntu boot command
+  boot_command = [
+      "c<wait>",
+      "linux /casper/vmlinuz --- autoinstall ${local.data_source_command}",
+      "<enter><wait>",
+      "initrd /casper/initrd",
+      "<enter><wait>",
+      "boot",
+      "<enter>"
+      ]
   shutdown_command      = "echo '${var.ssh_password}' | sudo -S -E shutdown -P now"
   shutdown_timeout      = "15m"
 

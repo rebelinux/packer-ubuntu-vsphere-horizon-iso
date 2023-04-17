@@ -23,7 +23,7 @@ vsphere_network         = "VM Network"
 vsphere_datastore       = "datastore1"
 
 # cloud_init files for unattended configuration for Ubuntu
-cloudinit_userdata      = "./http/user-data"
+cloudinit_userdata      = "./http/user-data.pkrtpl.hcl"
 cloudinit_metadata      = "./http/meta-data"
 
 # Ubuntu boot command
