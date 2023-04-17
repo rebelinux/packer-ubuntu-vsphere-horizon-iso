@@ -1,4 +1,4 @@
-# packer-ubuntu-vsphere-horizon-iso
+# :beginner: packer-ubuntu-vsphere-horizon-iso
 
 This repo builds automatically Ubuntu VM templates (Ubuntu 22.04) for VMware vSphere and Horizon environment using Hashicorp's Packer.
 
@@ -24,8 +24,8 @@ Copy the Horizon Agent installation file to the `./files/` folder:
 ```bash
 [rebelinux@rebelpc packer-ubuntu-vsphere-horizon-iso]$ ls -alh files/
 total 127M
--rw-r--r-- 1 rebelinux rebelinux    0 Apr 13 21:20 Place_Here_Horizon_Agent_Files.txt
--rw-r--r-- 1 rebelinux rebelinux 127M Apr 10 08:31 "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
+-rw-r--r-- 1 0 Apr 13 21:20 Place_Here_Horizon_Agent_Files.txt
+-rw-r--r-- 1 127M Apr 10 08:31 "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.gz"
 [rebelinux@rebelpc packer-ubuntu-vsphere-horizon-iso]$  
 ```
 
