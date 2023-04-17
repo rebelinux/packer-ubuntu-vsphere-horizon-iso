@@ -2,17 +2,13 @@
 
 This repo builds automatically Ubuntu VM templates (Ubuntu 22.04) for VMware vSphere and Horizon environment using Hashicorp's Packer.
 
-With this repo VM templates for the following Ubuntu systems can be built.
-
-- Ubuntu Desktop 22.04
-
-Ubuntu ISO files gets download automatically from public sources.
+Ubuntu ISO files gets downloaded from vCenter Datastore.
 
 ## How to use this repo
 
 ### Pre-requesites
 
-Download or `git clone https://github.com/rebelinux/packer-ubuntu-vsphere-horizon-iso.git` this repo and make sure you have [Packer](https://www.packer.io/downloads) Version 1.8.5 or later installed. If you don't know Packer, it's a single commandline binary which only needs to be on your `PATH`.
+Download or `git clone https://github.com/rebelinux/packer-ubuntu-vsphere-horizon-iso` this repo and make sure you have [Packer](https://www.packer.io/downloads) Version 1.8.5 or later installed. If you don't know Packer, it's a single commandline binary which only needs to be on your `PATH`.
 
 ### Step 1: Adjust variables
 
@@ -42,21 +38,22 @@ For example to build a Ubuntu Server 20.04 template run:
 
 If you are on a Windows machine then use the `build-2204.ps1` files.
 
+```powershell
+./build-2204.ps1
+```
+
 ### Optional: Template default credentials
 
-the default credentials after a successful build are
+The default credentials after a successful build are
 Username: `godadmin`
 Password: `godadmin`  
 
-If you would like to change the default ćredentials before a packer build, then you need to edit the following files:
+If you would like to change the default credentials before a packer build, then you need to edit the following files:
 
-- **variables.auto.pkrvars.hcl**
-- **user-data** (Line 13.14; Line 41)
+- **variables.auto.pkrvars.hcl** (Line 41:49)
 
-To generate an encypted password for [user-data](./html/user-data) use the following command:
+To generate an encrypted password use the following command:
 
 ```bash
-
 mkpasswd -m SHA-512 --rounds=4096
-
 ```
