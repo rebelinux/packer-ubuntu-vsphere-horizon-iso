@@ -33,6 +33,11 @@ total 127M
 
 #### Option 2: Use vCenter as a Web Server to host Horizon Agent File
 
+Save the Horizon agent installation files to a staging Datastore
+
+![Sample vSphere Staging Datastore](https://raw.githubusercontent.com/rebelinux/IMG/main/VMware_horizon_agent%20package.png "Sample vSphere Staging Datastore")
+
+
 ### Step 2: Init Packer
 
 Init Packer by using the following command. (Spot the dot at the end of the command!)
