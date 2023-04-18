@@ -24,11 +24,7 @@ rm -f /etc/ssh/ssh_host_*
 # partitioning schemes are used.
 
 echo "===> Remove default filesystem and related tools not used with the suggested"
-apt-get -qq remove -y   \
-        btrfs-progs \
-        cryptsetup* \
-        lvm2        \
-        xfsprogs
+apt-get -qq remove -y btrfs-progs cryptsetup* lvm2 xfsprogs &>/dev/null
 
 # Remove other packages present by default in Ubuntu Server but not
 # normally present in Ubuntu Desktop.
@@ -61,12 +57,12 @@ apt-get -qq -y remove           \
         gnome-initial-setup     \
         make                    \
         gcc                     \
-        libelf-dev              
+        libelf-dev              &>/dev/null
 
 # Cleans apt-get.
 echo '> Cleaning apt-get ...'
-apt-get clean
-apt-get autoremove -y
+apt-get clean &>/dev/null
+apt-get autoremove -y &>/dev/null
 
 # Disable Ubuntu AutoUpdate
 echo '> Disable Ubuntu AutoUpdate...'

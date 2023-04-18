@@ -37,6 +37,9 @@ Save the Horizon agent installation files to a staging Datastore
 
 ![Sample vSphere Staging Datastore](https://raw.githubusercontent.com/rebelinux/IMG/main/VMware_horizon_agent%20package.png "Sample vSphere Staging Datastore")
 
+Get the Horizon agent file URL from the `Browse datastores in the vSphere inventory`
+
+![Copy URL](https://raw.githubusercontent.com/rebelinux/IMG/main/Datastore_URL.png "Copy URL")
 
 ### Step 2: Init Packer
 

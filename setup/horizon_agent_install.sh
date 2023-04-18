@@ -38,7 +38,7 @@ then
 
         # Compiling V4L2Loopback driver files
         echo "===> Extracting V4L2Loopback driver files"
-        make clean && make && make install
+        make clean &>/dev/null && make && make install
 
         # Installing v4l2loopback-ctl
         echo "===> Installing v4l2loopback-ctl"
@@ -65,7 +65,7 @@ then
 
         # Compiling VHCI-HCD driver files
         echo "===> Compiling VHCI-HCD driver files"
-        make clean && make && make install
+        make clean &>/dev/null && make && make install
     else
         echo "===> Error: File vhci-hcd-1.15.tar.gz does not exists."
         echo "===> Error: Unable to compile and install VHCI-HCD driver"

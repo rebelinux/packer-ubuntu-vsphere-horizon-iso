@@ -3,11 +3,11 @@
 # Point NTP Server to AD Domain
 echo "===> Pointing NTP Server to $ADDomain Domain"
 sed -i /etc/systemd/timesyncd.conf -e "s/#NTP=/NTP=$NTPSERVER/g"
-sudo systemctl restart systemd-timesyncd
+sudo systemctl restart systemd-timesyncd &>/dev/null
 
 # Join AD Domain
 echo "===> Join $ADDomain Active Directory Domain"
-echo $JOINPASSWORD | sudo realm join --user=$JOINUSERNAME $ADDomain\
+echo "$JOINPASSWORD" | sudo realm join --user="$JOINUSERNAME" "$ADDomain"
 
 # Disable use_fully_qualified_names in AD Login
 echo "===> Disable use_fully_qualified_names in AD Login"
