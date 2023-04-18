@@ -234,7 +234,7 @@ source "vsphere-iso" "ubuntu" {
   RAM                   = var.mem_size
   RAM_reserve_all       = true
   disk_controller_type  = ["pvscsi"]
-  guest_os_type         = var.vsphere_guest_os_type
+  guest_os_type         = "ubuntu64Guest"
   iso_paths = var.iso_path
   remove_cdrom          = true
   cd_content            = local.data_source_content
