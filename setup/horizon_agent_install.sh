@@ -8,6 +8,9 @@
 # The main purpose of this script is to install and configure the Horizon Agent for linux. The script tries its best to 
 # compile support for USB and Real-Time Audio-Video redirection.
 
+# Usage
+# horizon_agent_install
+
 # Extracting VMware Horizon Agent files
 if [ -f "/tmp/$HORIZONAGENTFILE" ]
 then

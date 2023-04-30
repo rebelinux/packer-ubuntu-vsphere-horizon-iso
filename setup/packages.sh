@@ -7,6 +7,9 @@
 # Description
 # This script installs commonly used applications
 
+# Usage
+# packages
+
 # Updating APT
 echo "===> Updating Apt"
 apt-get -qq update &>/dev/null

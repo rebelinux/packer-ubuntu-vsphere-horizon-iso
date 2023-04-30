@@ -7,6 +7,9 @@
 # Description
 # This script is the final sealing process. It is cleaning the machine preparing it for instant horizon cloning.
 
+# Usage
+# cleanup
+
 echo '> Cleaning all audit logs ...'
 if [ -f /var/log/audit/audit.log ]; then
 cat /dev/null > /var/log/audit/audit.log
