@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Author: Jonathan Colon
+# Date Created: 10/04/2020
+# Last Modified: 30/04/2020
+
+# Description
+# The main purpose of this script is to install and configure the Horizon Agent for linux. The script tries its best to 
+# compile support for USB and Real-Time Audio-Video redirection.
+
 # Extracting VMware Horizon Agent files
 if [ -f "/tmp/$HORIZONAGENTFILE" ]
 then

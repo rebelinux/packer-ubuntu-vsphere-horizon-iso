@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Author: Jonathan Colon
+# Date Created: 10/04/2020
+# Last Modified: 30/04/2020
+
+# Description
+# This script installs commonly used applications
+
 # Updating APT
 echo "===> Updating Apt"
 apt-get -qq update &>/dev/null

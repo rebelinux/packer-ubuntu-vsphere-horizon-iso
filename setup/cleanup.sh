@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Author: Jonathan Colon
+# Date Created: 10/04/2020
+# Last Modified: 30/04/2020
+
+# Description
+# This script is the final sealing process. It is cleaning the machine preparing it for instant horizon cloning.
+
 echo '> Cleaning all audit logs ...'
 if [ -f /var/log/audit/audit.log ]; then
 cat /dev/null > /var/log/audit/audit.log
@@ -13,10 +20,6 @@ fi
 # Cleans SSH keys.
 echo '> Cleaning SSH keys ...'
 rm -f /etc/ssh/ssh_host_*
-# # Sets hostname to localhost.
-# echo '> Setting hostname to localhost ...'
-# cat /dev/null > /etc/hostname
-# hostnamectl set-hostname localhost
 
 # Desktop Cleanup
 # Remove default filesystem and related tools not used with the suggested

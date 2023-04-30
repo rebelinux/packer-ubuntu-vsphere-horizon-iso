@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Author: Jonathan Colon
+# Date Created: 10/04/2020
+# Last Modified: 30/04/2020
+
+# Description
+# First the script points the machine to the NTP server of the $NTPSERVER domain then adds the linux machine to the domain specified in the $ADDomain variable. 
+# Finally it configures the automatic creation of the home directory for the users of the network
+
 # Point NTP Server to AD Domain
 echo "===> Pointing NTP Server to $ADDomain Domain"
 sed -i /etc/systemd/timesyncd.conf -e "s/#NTP=/NTP=$NTPSERVER/g"
