@@ -24,7 +24,7 @@ then
         if [ -f "google-chrome-stable_current_amd64.deb" ] 
         then 
             printf "===> Google Chrome binary file found, trying to install it.\n"
-            DEBIAN_FRONTEND=noninteractive apt-get -qq -y install ./google-chrome-stable_current_amd64.deb 2>&1
+            DEBIAN_FRONTEND=noninteractive apt-get -qq -y install ./google-chrome-stable_current_amd64.deb >/dev/null
             retval=$?
             if [ $retval -ne 0 ]
             then 
@@ -45,7 +45,7 @@ sleep 5
 if [ "$Mozilla_Firefox_Install" ]
 then 
     printf "===> Installing Mozilla Firefox package.\n"
-    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install firefox 2>&1
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y install firefox >/dev/null
 
     retval=$?
     if [ $retval -ne 0 ]
@@ -74,7 +74,7 @@ then
         if [ -f "vscode.deb" ] 
         then 
             printf "===> Microsoft VSCode binary file found, trying to install it.\n"
-            DEBIAN_FRONTEND=noninteractive apt-get -qq -y install ./vscode.deb 2>&1
+            DEBIAN_FRONTEND=noninteractive apt-get -qq -y install ./vscode.deb >/dev/null
             retval=$?
             if [ $retval -ne 0 ]; 
             then
