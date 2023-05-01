@@ -22,7 +22,7 @@ autoinstall:
     apt:
         primary:
             - arches: [i386, amd64]
-              uri: "http://de.archive.ubuntu.com/ubuntu/"
+              uri: "http://archive.ubuntu.com/ubuntu/"
     packages:
         - apt-transport-https
         - ca-certificates
