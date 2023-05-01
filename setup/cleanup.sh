@@ -63,12 +63,12 @@ apt-get -qq -y remove           \
         gnome-initial-setup     \
         make                    \
         gcc                     \
-        libelf-dev              2>&1
+        libelf-dev              &>/dev/null
 
 # Cleans apt-get.
 printf '> Cleaning apt-get ...\n'
-apt-get clean 2>&1
-apt-get autoremove -y 2>&1
+apt-get clean &>/dev/null
+apt-get autoremove -y &>/dev/null
 
 # Disable Ubuntu AutoUpdate
 printf '> Disable Ubuntu AutoUpdate...\n'

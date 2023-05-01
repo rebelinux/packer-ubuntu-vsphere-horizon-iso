@@ -55,7 +55,7 @@ then
 
             # Compiling V4L2Loopback driver files
             printf "===> Extracting V4L2Loopback driver files\n"
-            make clean 2>&1 && make && make install
+            make clean &>/dev/null && make && make install
 
             # Installing v4l2loopback-ctl
             printf "===> Installing v4l2loopback-ctl"
@@ -82,7 +82,7 @@ then
 
             # Compiling VHCI-HCD driver files
             printf "===> Compiling VHCI-HCD driver files\n"
-            make clean 2>&1 && make && make install
+            make clean &>/dev/null && make && make install
         else
             printf "===> Error: File vhci-hcd-1.15.tar.gz does not exists.\n"
             printf "===> Error: Unable to compile and install VHCI-HCD driver\n"
