@@ -11,17 +11,17 @@
 # packages
 
 # Updating APT
-echo "===> Updating Apt"
-apt-get -qq update &>/dev/null
+printf "===> Updating Apt\n"
+apt-get -qq update 2>&1
 
 # Disable Ubuntu AutoUpdate
-echo '> Disable invalid v4l2loopback driver...'
+printf '===> Disable invalid v4l2loopback driver...\n'
 echo "override v4l2loopback * extra" >> /etc/depmod.d/ubuntu.conf
 depmod -A
-sudo rmmod v4l2loopback &>/dev/null
+sudo rmmod v4l2loopback 2>&1
 
 # Install Additional Packages
-echo "===> Installing additional packages"
+printf "===> Installing additional packages\n"
 export DEBIAN_FRONTEND=noninteractive
 apt-get -qq -y install      \
             acl             \
@@ -43,7 +43,7 @@ apt-get -qq -y install      \
             gcc             \
             libelf-dev      \
             zenity          \
-            ubuntu-desktop  &>/dev/null
+            ubuntu-desktop  2>&1
   
 # Updating MLocate database
 
@@ -51,6 +51,6 @@ is_pkg_installed=$(dpkg-query -W --showformat='${Status}\n' mlocate | grep "inst
 
 if [ "${is_pkg_installed}" == "install ok installed" ];
 then
-    echo "===> Updating MLocate database"
+    printf "===> Updating MLocate database\n"
     updatedb
 fi
