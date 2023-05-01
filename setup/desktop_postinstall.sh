@@ -13,7 +13,7 @@
 # Enable the boot splash
 printf "===> Enable the boot splash\n"
 sed -i /etc/default/grub -e 's/GRUB_CMDLINE_LINUX_DEFAULT=".*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/'
-update-grub &>/dev/null
+update-grub >/dev/null
 
 # Enable ssh password auth and permit root login
 printf "===> Enable ssh password auth and permit root login\n"

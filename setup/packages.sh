@@ -12,13 +12,13 @@
 
 # Updating APT
 printf "===> Updating Apt\n"
-apt-get -qq update &>/dev/null
+apt-get -qq update 1> /dev/null
 
 # Disable Ubuntu AutoUpdate
 printf '===> Disable invalid v4l2loopback driver...\n'
 echo "override v4l2loopback * extra" >> /etc/depmod.d/ubuntu.conf
 depmod -A
-sudo rmmod v4l2loopback &>/dev/null
+sudo rmmod v4l2loopback 1> /dev/null
 
 # Install Additional Packages
 printf "===> Installing additional packages\n"
@@ -43,7 +43,7 @@ apt-get -qq -y install      \
             gcc             \
             libelf-dev      \
             zenity          \
-            ubuntu-desktop  &>/dev/null
+            ubuntu-desktop  1> /dev/null
   
 # Updating MLocate database
 

@@ -14,7 +14,7 @@
 # Point NTP Server to AD Domain
 printf "===> Pointing NTP Server to %s Domain\n" "$ADDomain"
 sed -i /etc/systemd/timesyncd.conf -e "s/#NTP=/NTP=$NTPSERVER/g"
-sudo systemctl restart systemd-timesyncd 2>&1
+sudo systemctl restart systemd-timesyncd 1> /dev/null
 
 # Join AD Domain
 printf "===> Join %s Active Directory Domain\n" "$ADDomain"

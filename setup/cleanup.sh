@@ -10,7 +10,7 @@
 # Usage
 # cleanup
 
-printf '> Cleaning all audit logs ...\n'
+printf '"===>  Cleaning all audit logs ...\n'
 if [ -f /var/log/audit/audit.log ]; then
 cat /dev/null > /var/log/audit/audit.log
 fi
@@ -21,7 +21,7 @@ if [ -f /var/log/lastlog ]; then
 cat /dev/null > /var/log/lastlog
 fi
 # Cleans SSH keys.
-printf '> Cleaning SSH keys ...\n'
+printf '"===>  Cleaning SSH keys ...\n'
 rm -f /etc/ssh/ssh_host_*
 
 # Desktop Cleanup
@@ -30,7 +30,7 @@ rm -f /etc/ssh/ssh_host_*
 # partitioning schemes are used.
 
 printf "===> Remove default filesystem and related tools not used with the suggested\n"
-apt-get -qq remove -y btrfs-progs cryptsetup* lvm2 xfsprogs 2>&1
+apt-get -qq remove -y btrfs-progs cryptsetup* lvm2 xfsprogs 1> /dev/null
 
 # Remove other packages present by default in Ubuntu Server but not
 # normally present in Ubuntu Desktop.
@@ -63,26 +63,26 @@ apt-get -qq -y remove           \
         gnome-initial-setup     \
         make                    \
         gcc                     \
-        libelf-dev              &>/dev/null
+        libelf-dev 1> /dev/null
 
 # Cleans apt-get.
-printf '> Cleaning apt-get ...\n'
-apt-get clean &>/dev/null
-apt-get autoremove -y &>/dev/null
+printf '"===>  Cleaning apt-get ...\n'
+apt-get clean 1> /dev/null
+apt-get autoremove -y 1> /dev/null
 
 # Disable Ubuntu AutoUpdate
-printf '> Disable Ubuntu AutoUpdate...\n'
+printf '"===>  Disable Ubuntu AutoUpdate...\n'
 sed -i /etc/apt/apt.conf.d/20auto-upgrades -e 's/APT::Periodic::Update-Package-Lists "1";/APT::Periodic::Update-Package-Lists "0";/g'
 sed -i /etc/apt/apt.conf.d/20auto-upgrades -e 's/APT::Periodic::Unattended-Upgrade "1";/APT::Periodic::Unattended-Upgrade "0";/g'
 
 # Cleans the machine-id.
-printf '> Cleaning the machine-id ...\n'
+printf '"===>  Cleaning the machine-id ...\n'
 truncate -s 0 /etc/machine-id
 rm /var/lib/dbus/machine-id
 ln -s /etc/machine-id /var/lib/dbus/machine-id
 
 # optional: cleaning cloud-init
-printf '> Cleaning cloud-init\n'
+printf '"===>  Cleaning cloud-init\n'
 rm -rf /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg
 rm -rf /etc/cloud/cloud.cfg.d/99-installer.cfg
 echo 'datasource_list: [ VMware, NoCloud, ConfigDrive ]' | tee /etc/cloud/cloud.cfg.d/90_dpkg.cfg

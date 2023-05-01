@@ -51,16 +51,16 @@ then
             # Patching V4L2Loopback driver files
             printf "===> Patching V4L2Loopback driver files\n"
             cd "/tmp/v4l2loopback-0.12.5/"
-            patch -p1 < "/tmp/hzagentdir/resources/v4l2loopback/v4l2loopback.patch"
+            patch -p1 < "/tmp/hzagentdir/resources/v4l2loopback/v4l2loopback.patch" 1> /dev/null
 
             # Compiling V4L2Loopback driver files
             printf "===> Extracting V4L2Loopback driver files\n"
-            make clean &>/dev/null && make && make install
+            make clean 1> /dev/null && make 1> /dev/null && make install 1> /dev/null
 
             # Installing v4l2loopback-ctl
             printf "===> Installing v4l2loopback-ctl"
-            make install-utils
-            depmod -A
+            make install-utils 1> /dev/null
+            depmod -A 1> /dev/null
         else
             printf "===> Error: File v0.12.5.tar.gz does not exists.\n"
             printf "===> Error: Unable to compile and install V4L2Loopback driver\n"
@@ -78,11 +78,11 @@ then
             # Patching VHCI-HCD driver files
             printf "===> Patching VHCI-HCD driver files\n"
             cd "/tmp/vhci-hcd-1.15"
-            patch -p1 < "/tmp/hzagentdir/resources/vhci/patch/vhci.patch"
+            patch -p1 < "/tmp/hzagentdir/resources/vhci/patch/vhci.patch" 1> /dev/null
 
             # Compiling VHCI-HCD driver files
             printf "===> Compiling VHCI-HCD driver files\n"
-            make clean &>/dev/null && make && make install
+            make clean 1> /dev/null && make 1> /dev/null && make install 1> /dev/null
         else
             printf "===> Error: File vhci-hcd-1.15.tar.gz does not exists.\n"
             printf "===> Error: Unable to compile and install VHCI-HCD driver\n"
@@ -116,7 +116,15 @@ then
 
             printf "===> Using install options: %s\n" "$INSTALL_OPTIONS"
 
-            ./install_viewagent.sh $INSTALL_OPTIONS
+            ./install_viewagent.sh $INSTALL_OPTIONS 1> /dev/null
+
+            retval=$?
+            if [ $retval -ne 0 ] 
+            then
+                printf "===> Unable to install Horizon Agent for Linux\n"
+            else
+                printf "===> Horizon Agent for Linux installed successfully\n"
+            fi
 
         else
             printf "===> Error: Directory /tmp/hzagentdir does not exists.\n"
