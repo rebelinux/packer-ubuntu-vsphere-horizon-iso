@@ -31,6 +31,7 @@ shell_scripts           = [
     "./setup/desktop_postinstall.sh",
     "./setup/ad_domain_join.sh",
     "./setup/horizon_agent_install.sh",
+    "./setup/application_install.sh",
     "./setup/cleanup.sh"
     ]
 
@@ -67,3 +68,11 @@ horizon_agent_file = "VMware-horizonagent-linux-x86_64-2303-8.9.0-21434177.tar.g
 # Uncommnet this if using vcenter as web server
 // horizon_agent_datastore = "HDD-VM-ISO-LOW-PERF"
 // horizon_agent_path = "/ISO/VMWARE/Horizon/"
+
+# Third-Party Application install
+
+google_chrome_install = "false"
+
+mozilla_firefox_install = "false"
+
+microsoft_vscode_install = "false"
