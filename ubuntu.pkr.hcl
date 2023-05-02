@@ -81,6 +81,11 @@ variable "microsoft_vscode_install" {
   default = "false"
 }
 
+variable "additional_packages" {
+  type =  string
+  default = "false"
+}
+
 variable "timezone" {
   type =  string
   default = "Etc/UTC"
@@ -329,7 +334,8 @@ build {
       "HORIZONAGENTFILE=${var.horizon_agent_file}",
       "Google_Chrome_Install=${var.google_chrome_install}",
       "Mozilla_Firefox_Install=${var.mozilla_firefox_install}",
-      "Microsoft_VSCode_Install=${var.microsoft_vscode_install}"
+      "Microsoft_VSCode_Install=${var.microsoft_vscode_install}",
+      "Additional_Packages=${var.additional_packages}"
     ]
     scripts = var.shell_scripts
     expect_disconnect = true

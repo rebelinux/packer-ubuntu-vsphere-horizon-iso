@@ -76,3 +76,7 @@ google_chrome_install = "false"
 mozilla_firefox_install = "false"
 
 microsoft_vscode_install = "false"
+
+# Specify additional packages to Install
+
+additional_packages = ""

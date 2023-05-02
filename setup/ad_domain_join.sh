@@ -23,7 +23,7 @@ echo "$JOINPASSWORD" | sudo realm join --user="$JOINUSERNAME" "$ADDomain"
 retval="$?"
 if [ $retval -ne 0 ] 
 then
-    printf "Unable to add machine to domain %s \n" "$ADDomain"
+    printf "===> Unable to add machine to domain %s \n" "$ADDomain"
 else 
     # Disable use_fully_qualified_names in AD Login
     printf "===> Disable use_fully_qualified_names in AD Login\n"

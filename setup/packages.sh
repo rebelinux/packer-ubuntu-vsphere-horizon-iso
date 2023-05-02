@@ -44,7 +44,15 @@ apt-get -qq -y install      \
             libelf-dev      \
             zenity          \
             ubuntu-desktop  1> /dev/null
-  
+
+if [ -z "$Additional_Packages" ]
+then
+    printf "===> Empty \$Aditional_Packages variable, disabling additional packages install\n"
+else
+    printf "===> Installing additional packages\n"
+    apt-get -qq -y install $Additional_Packages 1> /dev/null
+fi
+
 # Updating MLocate database
 
 is_pkg_installed=$(dpkg-query -W --showformat='${Status}\n' mlocate | grep "install ok installed")
